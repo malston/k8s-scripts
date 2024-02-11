@@ -11,6 +11,8 @@ KC="${1:-$KUBECONFIG}"
 date=$(date)
 
 cp "$HOME/.kube/config" "$HOME/.kube/config.${date}"
-KUBECONFIG=$HOME/.kube/config:$KC
+export KUBECONFIG="$HOME/.kube/config:$KC"
 
-kubectl config view --flatten > /tmp/config && mv /tmp/config "$HOME/.kube/config"
+kubectl config view --flatten \
+  > /tmp/config && \
+  mv /tmp/config "$HOME/.kube/config"
